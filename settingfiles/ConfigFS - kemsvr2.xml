@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FSConfigData>
+  <HostName>kemsvr2</HostName>
+  <IpAddr>192.168.96.213</IpAddr>
+  <UserId>kemsvr2\Administrator</UserId>
+  <Passwd>QU_\b</Passwd>
+  <ShareName>\\kemsvr2\ireportdata$</ShareName>
+  <RootPath>\\kemsvr2\ireportdata$\bkup</RootPath>
+  <FileFilter>*_dataoutput*.csv</FileFilter>
+</FSConfigData>
