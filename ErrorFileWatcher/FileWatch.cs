@@ -54,8 +54,8 @@ namespace ErrorFileWatcher
                 myEMailCc = myDs.Tables["Cc"].AsEnumerable().Select(x => x.Field<string>("EMAIL")).ToList();
 
                 // データベースから有効かつ運用中の工程名称を取得
-                if (!cmn.Dba.GetIRepoKt(cmn, Common.A70_ACTIVE_ACTIVE, Common.A70_OPESTAT_OPARATED, ref myDs)) return;
-                myIRepoKTNM = myDs.Tables[Common.TABLE_NAME_A70].AsEnumerable()
+                if (!cmn.Dba.GetIRepoKt(cmn, Common.KM1060_ACTIVE_ACTIVE, Common.KM1060_OPESTAT_OPARATED, ref myDs)) return;
+                myIRepoKTNM = myDs.Tables[Common.TABLE_NAME_KM1060].AsEnumerable()
                     .Select(row => row.Field<string>("IREPOKTNM")).ToList();
 
                 // データベースはクローズ
@@ -71,17 +71,17 @@ namespace ErrorFileWatcher
         public void Watch()
         {
             FileSystemWatcher watcher = new FileSystemWatcher();
+            
+            // サーバーのファイルシステムに接続
+            cmn.Fa.ConnectServer(cmn);
 
             watcher.Path = @cmn.FsCd.RootPath;      // コピー元ファイルの保存先
             watcher.Filter = @cmn.FsCd.FileFilter;  // コピー対象ファイルのフィルター
-            watcher.IncludeSubdirectories = true;
+            watcher.IncludeSubdirectories = false;
             watcher.NotifyFilter = NotifyFilters.FileName;
             watcher.Created += new FileSystemEventHandler(DoWork);
             watcher.EnableRaisingEvents = true;
-
-#if DEBUG
-            Console.Read(); // キー入力があるまで待つ
-#endif
+            
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace ErrorFileWatcher
             }
         }
         
-        private void SendMail(string file)
+        private void SendMail(string _file)
         {
             try
             {
@@ -131,16 +131,18 @@ namespace ErrorFileWatcher
                         Common.MAIL_BODY_FOOTER;
 
                     // 自動受入ログの添付（実行中はファイルにアクセス出来ない為複写して添付）
-                    if (File.Exists(Common.JIDOU_LOG_PATH + "\\" + Common.JIDOU_LOG_FILE))
+                    // \\kemsvr2\d$\IREPOEXE\exe\batch.log
+                    var jidoulog_source = @cmn.FsCd.ShareName + Common.JIDOU_LOG_PATH + "\\" + Common.JIDOU_LOG_FILE;
+                    if (File.Exists(jidoulog_source))
                     {
-                        var jidoulog = @cmn.BaseDir + "\\" + Common.JIDOU_LOG_FILE;
-                        File.Copy(@Common.JIDOU_LOG_PATH + "\\" + Common.JIDOU_LOG_FILE, jidoulog, true);
-                        Attachment attachjidou = new Attachment(jidoulog);
+                        var jidoulog_dest = @cmn.BaseDir + "\\" + Common.JIDOU_LOG_FILE;
+                        File.Copy(jidoulog_source, jidoulog_dest, true);
+                        Attachment attachjidou = new Attachment(jidoulog_dest);
                         msg.Attachments.Add(attachjidou);
                     }
 
                     // errorファイルを添付
-                    Attachment attacherror = new Attachment(@cmn.FsCd.RootPath + "\\" + file);
+                    Attachment attacherror = new Attachment(@cmn.FsCd.RootPath + "\\" + _file);
                     msg.Attachments.Add(attacherror);
 
                     SmtpClient sc = new SmtpClient();

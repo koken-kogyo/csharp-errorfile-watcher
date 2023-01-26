@@ -31,7 +31,7 @@
 ~~~
 D:.
 │  .gitignore					# ソース管理除外対象
-│  ErrorFileWatcher.sln			# プロジェクトファイル
+│  ErrorFileWatcher.sln 			# プロジェクトファイル
 │  README.md					# このファイル
 │  ReleaseNote.txt				# リリース情報
 │  
@@ -75,7 +75,6 @@ D:.
 
 | Table    | Name                      |  
 | :------- | :------------------------ |  
-| A70      | i-Reporter 対象工程マスタ |  
 | KM0040   | アドレス帳マスタ          |  
-
+| KM1060   | i-Reporter 対象工程マスタ |  
 

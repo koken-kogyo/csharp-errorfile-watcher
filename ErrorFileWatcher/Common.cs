@@ -14,14 +14,9 @@ namespace ErrorFileWatcher
         public const string CONFIG_FILE_FS = "ConfigFS.xml";        // ファイルシステム設定 ファイル名
         public const string CONFIG_FILE_SMTP = "ConfigSMTP.xml";    // SMTP設定 ファイル名
         public const string LOG_FILE = PROGRAM_NAME + ".log";       // ログ ファイル名
-        public const string JIDOU_LOG_PATH = @"D:\\IREPOEXE\\exe";  // 自動受入のアプリログの場所
+        public const string JIDOU_LOG_PATH = @"\\IREPOEXE\\exe";    // 自動受入のアプリログの場所
         public const string JIDOU_LOG_FILE = "batch.log";           // 自動受入のアプリログファイル名
         public const int RETRY_MAX = 5;                             // 再試行回数上限
-
-        // i-Reporter 対象工程マスタ (A70)
-        public const string TABLE_NAME_A70 = "A70";                 // テーブル名称: A70
-        public const string A70_ACTIVE_ACTIVE = "1";                // 有効フラグ (1:有効)
-        public const string A70_OPESTAT_OPARATED = "3";             // 運用状態フラグ (3:運用中)
         
         // アドレス帳マスタ (KM0040)
         public const string TABLE_NAME_KM0040 = "KM0040";           // テーブル名称: KM0040
@@ -29,6 +24,11 @@ namespace ErrorFileWatcher
         public const string EMAIL_ADRTYPE_TO = "1";                 // 宛先種別 (1:To)
         public const string EMAIL_ADRTYPE_CC = "2";                 // 宛先種別 (2:Cc)
         public const string EMAIL_ADRTYPE_BCC = "3";                // 宛先種別 (3:Bcc)
+
+        // i-Reporter 対象工程マスタ (KM1060)
+        public const string TABLE_NAME_KM1060 = "KM1060";           // テーブル名称: KM1060
+        public const string KM1060_ACTIVE_ACTIVE = "1";             // 有効フラグ (1:有効)
+        public const string KM1060_OPESTAT_OPARATED = "3";          // 運用状態フラグ (3:運用中)
 
         // メールタイトル
         public const string MAIL_SUBJECT = "[自動通知] 製造実績受入エラーを検出しました！";

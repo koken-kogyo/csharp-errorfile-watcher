@@ -114,6 +114,7 @@ namespace ErrorFileWatcher
                     catch (Exception e)
                     {
                         Console.WriteLine("{0} could not be started.", DISPLAY_NAME);
+                        Console.WriteLine(e.Message);
                     }
                 }
             }

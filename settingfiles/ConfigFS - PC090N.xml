@@ -4,7 +4,7 @@
   <IpAddr>192.168.96.189</IpAddr>
   <UserId>pc090n\koken090</UserId>
   <Passwd>[`]Xb%/(</Passwd>
-  <ShareName>\\pc090n\ireportdata</ShareName>
-  <RootPath>\\pc090n\ireportdata\bkup</RootPath>
+  <ShareName>\\pc090n\d$</ShareName>
+  <RootPath>\\pc090n\ireportdata\bkup\error</RootPath>
   <FileFilter>*_dataoutput*.csv</FileFilter>
 </FSConfigData>
